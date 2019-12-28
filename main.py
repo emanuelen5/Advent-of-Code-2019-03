@@ -3,6 +3,19 @@ import sys
 
 def get_coordinates(wire):
     coords = [[0,0]]
+    for step in wire:
+        step_dir = step[0]
+        step_length = int(step[1:])
+        new_coord = coords[-1].copy()
+        if step_dir == "R":
+            new_coord[0] += step_length
+        elif step_dir == "L":
+            new_coord[0] -= step_length
+        elif step_dir == "U":
+            new_coord[1] += step_length
+        elif step_dir == "D":
+            new_coord[1] -= step_length
+        coords.append(new_coord)
     return coords
 
 def get_intersections(coords1, coords2):
