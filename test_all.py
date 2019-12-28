@@ -24,7 +24,14 @@ class TestWireDistance(unittest.TestCase):
 
 class TestCoordinateDistance(unittest.TestCase):
     def test_simple(self):
-        pass
+        self.assertEqual(1, get_coordinate_distance([0,0], [0,1]))
+        self.assertEqual(1, get_coordinate_distance([0,1], [0,0]))
+        self.assertEqual(1, get_coordinate_distance([0,1], [0,2]))
+        self.assertEqual(1, get_coordinate_distance([0,2], [0,1]))
+        self.assertEqual(1, get_coordinate_distance([0,0], [1,0]))
+        self.assertEqual(1, get_coordinate_distance([1,0], [0,0]))
+        self.assertEqual(1, get_coordinate_distance([1,0], [2,0]))
+        self.assertEqual(1, get_coordinate_distance([2,0], [1,0]))
 
 class TestMoveType(unittest.TestCase):
     def test_horizontal(self):
