@@ -59,7 +59,7 @@ def get_intersections(coords1, coords2):
     intersections = []
     for i1 in range(len(coords1)-1):
         for i2 in range(len(coords2)-1):
-            intersection = get_intersection(coords1[i1], coords1[i1+1], coords2[i1], coords2[i2+1])
+            intersection = get_intersection(coords1[i1], coords1[i1+1], coords2[i2], coords2[i2+1])
             if intersection:
                 intersections.append(intersection)
     return intersections
