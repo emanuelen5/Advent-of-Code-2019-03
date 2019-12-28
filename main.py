@@ -1,19 +1,28 @@
 #!/usr/bin/env python3
 import sys
 
+MOVE_HORIZONTAL = "H"
+MOVE_VERTICAL   = "V"
+MOVE_DIAGONAL   = "D"
+
+DIR_LEFT  = "L"
+DIR_RIGHT = "R"
+DIR_UP    = "U"
+DIR_DOWN  = "D"
+
 def get_coordinates(wire):
     coords = [[0,0]]
     for step in wire:
         step_dir = step[0]
         step_length = int(step[1:])
         new_coord = coords[-1].copy()
-        if step_dir == "R":
+        if step_dir == DIR_RIGHT:
             new_coord[0] += step_length
-        elif step_dir == "L":
+        elif step_dir == DIR_LEFT:
             new_coord[0] -= step_length
-        elif step_dir == "U":
+        elif step_dir == DIR_UP:
             new_coord[1] += step_length
-        elif step_dir == "D":
+        elif step_dir == DIR_DOWN:
             new_coord[1] -= step_length
         coords.append(new_coord)
     return coords
@@ -22,21 +31,21 @@ def get_move_type(coord_from, coord_to):
     if coord_from == coord_to:
         return None
     elif coord_from[1] == coord_to[1]:
-        return "H"
+        return MOVE_HORIZONTAL
     elif coord_from[0] == coord_to[0]:
-        return "V"
+        return MOVE_VERTICAL
     else:
-        return "D"
+        return MOVE_DIAGONAL
 
 def get_intersection(coord1_from, coord1_to, coord2_from, coord2_to):
     move_type1 = get_move_type(coord1_from, coord1_to)
     move_type2 = get_move_type(coord2_from, coord2_to)
-    if move_type1 == "H" and move_type2 == "V":
+    if move_type1 == MOVE_HORIZONTAL and move_type2 == MOVE_VERTICAL:
         if False:
             return [coord2_from[0], coord1_from[1]]
         else:
             return None
-    elif move_type1 == "V" and move_type2 == "H":
+    elif move_type1 == MOVE_VERTICAL and move_type2 == MOVE_HORIZONTAL:
         if False:
             return [coord1_from[0], coord2_from[1]]
         else:

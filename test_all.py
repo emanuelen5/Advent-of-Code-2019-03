@@ -1,4 +1,5 @@
 from main import check, get_intersection, get_intersections, get_coordinates, get_move_type
+from main import MOVE_HORIZONTAL, MOVE_DIAGONAL, MOVE_VERTICAL
 import unittest
 
 class TestCoordinates(unittest.TestCase):
@@ -16,9 +17,9 @@ class TestCoordinates(unittest.TestCase):
 
 class TestMoveType(unittest.TestCase):
     def test_horizontal(self):
-        self.assertEqual("H", get_move_type([0,0], [1,0]))
-        self.assertEqual("V", get_move_type([0,0], [0,1]))
-        self.assertEqual("D", get_move_type([0,0], [1,1]))
+        self.assertEqual(MOVE_HORIZONTAL, get_move_type([0,0], [1,0]))
+        self.assertEqual(MOVE_VERTICAL, get_move_type([0,0], [0,1]))
+        self.assertEqual(MOVE_DIAGONAL, get_move_type([0,0], [1,1]))
         self.assertEqual(None, get_move_type([0,0], [0,0]))
 
 class TestIntersection(unittest.TestCase):
