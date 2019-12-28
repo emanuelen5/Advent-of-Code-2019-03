@@ -40,7 +40,7 @@ def get_move_type(coord_from, coord_to):
 def get_intersection_solution(h_coord_from, h_coord_to, v_coord_from, v_coord_to):
     h_move_span = sorted([h_coord_from[0], h_coord_to[0]])
     v_move_span = sorted([v_coord_from[1], v_coord_to[1]])
-    if h_move_span[0] <= v_coord_from[0] <= h_move_span[1] and v_move_span[0] <= h_coord_from[1] <= v_move_span[1]:
+    if h_move_span[0] < v_coord_from[0] < h_move_span[1] and v_move_span[0] < h_coord_from[1] < v_move_span[1]:
         return [v_coord_from[0], h_coord_from[1]]
     else:
         return None
@@ -57,6 +57,11 @@ def get_intersection(coord1_from, coord1_to, coord2_from, coord2_to):
 
 def get_intersections(coords1, coords2):
     intersections = []
+    for i1 in range(len(coords1)-1):
+        for i2 in range(len(coords2)-1):
+            intersection = get_intersection(coords1[i1], coords1[i1+1], coords2[i1], coords2[i2+1])
+            if intersection:
+                intersections.append(intersection)
     return intersections
 
 def check(wire1, wire2):
@@ -64,7 +69,7 @@ def check(wire1, wire2):
     coords2 = get_coordinates(wire2)
     intersections = get_intersections(coords1, coords2)
     distances = [sum(i) for i in intersections]
-    return min(intersections)
+    return min(distances)
 
 def main():
     import argparse
