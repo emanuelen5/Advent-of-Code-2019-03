@@ -18,8 +18,34 @@ def get_coordinates(wire):
         coords.append(new_coord)
     return coords
 
+def get_move_type(coord_from, coord_to):
+    if coord_from == coord_to:
+        return None
+    elif coord_from[1] == coord_to[1]:
+        return "H"
+    elif coord_from[0] == coord_to[0]:
+        return "V"
+    else:
+        return "D"
+
+def get_intersection(coord1_from, coord1_to, coord2_from, coord2_to):
+    move_type1 = get_move_type(coord1_from, coord1_to)
+    move_type2 = get_move_type(coord2_from, coord2_to)
+    if move_type1 == "H" and move_type2 == "V":
+        if False:
+            return [coord2_from[0], coord1_from[1]]
+        else:
+            return None
+    elif move_type1 == "V" and move_type2 == "H":
+        if False:
+            return [coord1_from[0], coord2_from[1]]
+        else:
+            return None
+    else:
+        return None
+
 def get_intersections(coords1, coords2):
-    intersections = [[0,0], [1,1]]
+    intersections = []
     return intersections
 
 def check(wire1, wire2):

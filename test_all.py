@@ -1,4 +1,4 @@
-from main import check, get_intersections, get_coordinates
+from main import check, get_intersection, get_intersections, get_coordinates, get_move_type
 import unittest
 
 class TestCoordinates(unittest.TestCase):
@@ -14,7 +14,23 @@ class TestCoordinates(unittest.TestCase):
     def test_several(self):
         self.check_from_input([[0,0], [1,0], [1,1], [0,1], [0,0]], "R1,U1,L1,D1")
 
-class TestIntersetions(unittest.TestCase):
+class TestMoveType(unittest.TestCase):
+    def test_horizontal(self):
+        self.assertEqual("H", get_move_type([0,0], [1,0]))
+        self.assertEqual("V", get_move_type([0,0], [0,1]))
+        self.assertEqual("D", get_move_type([0,0], [1,1]))
+        self.assertEqual(None, get_move_type([0,0], [0,0]))
+
+class TestIntersection(unittest.TestCase):
+    def test_single(self):
+        self.assertEqual([1,1], get_intersection([0,1], [2,1], [1,0], [1,2]))
+        self.assertEqual([1,1], get_intersection([1,0], [1,2], [0,1], [2,1]))
+
+    def test_none(self):
+        self.assertEqual(None, get_intersection([0,1], [2,1], [5,0], [5,2]))
+        self.assertEqual(None, get_intersection([1,0], [1,2], [0,5], [2,5]))
+
+class TestIntersections(unittest.TestCase):
     def test_single_horizontal(self):
         self.assertEqual([[1,1]], get_intersections([[0,1], [2,1]], [[1,0], [1,2]]))
 
