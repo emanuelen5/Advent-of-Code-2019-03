@@ -41,12 +41,16 @@ def get_intersection(coord1_from, coord1_to, coord2_from, coord2_to):
     move_type1 = get_move_type(coord1_from, coord1_to)
     move_type2 = get_move_type(coord2_from, coord2_to)
     if move_type1 == MOVE_HORIZONTAL and move_type2 == MOVE_VERTICAL:
-        if False:
+        h_move_span = sorted([coord1_from[0], coord1_to[0]])
+        v_move_span = sorted([coord2_from[1], coord2_to[1]])
+        if h_move_span[0] <= coord2_from[0] <= h_move_span[1] and v_move_span[0] <= coord1_from[1] <= v_move_span[1]:
             return [coord2_from[0], coord1_from[1]]
         else:
             return None
     elif move_type1 == MOVE_VERTICAL and move_type2 == MOVE_HORIZONTAL:
-        if False:
+        h_move_span = sorted([coord2_from[0], coord2_to[0]])
+        v_move_span = sorted([coord1_from[1], coord1_to[1]])
+        if h_move_span[0] <= coord1_from[0] <= h_move_span[1] and v_move_span[0] <= coord2_from[1] <= v_move_span[1]:
             return [coord1_from[0], coord2_from[1]]
         else:
             return None
