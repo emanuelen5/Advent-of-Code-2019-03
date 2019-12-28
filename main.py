@@ -68,7 +68,7 @@ def check(wire1, wire2):
     coords1 = get_coordinates(wire1)
     coords2 = get_coordinates(wire2)
     intersections = get_intersections(coords1, coords2)
-    distances = [sum(i) for i in intersections]
+    distances = [sum([abs(j) for j in i]) for i in intersections]
     return min(distances)
 
 def main():
