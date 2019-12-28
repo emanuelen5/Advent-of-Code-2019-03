@@ -27,6 +27,16 @@ def get_coordinates(wire):
         coords.append(new_coord)
     return coords
 
+def get_wire_distances(wire):
+    distances = [0]
+    for step in wire:
+        step_length = int(step[1:])
+        distances.append(distances[-1] + step_length)
+    return distances
+
+def get_coordinate_distance(coord1, coord2):
+    return sum([abs(c1-c2) for c1,c2 in zip(coord1, coord2)])
+
 def get_move_type(coord_from, coord_to):
     if coord_from == coord_to:
         return None
@@ -55,21 +65,23 @@ def get_intersection(coord1_from, coord1_to, coord2_from, coord2_to):
     else:
         return None
 
-def get_intersections(coords1, coords2):
-    intersections = []
+def get_intersections_and_indices(coords1, coords2):
+    intersections_and_indices = []
     for i1 in range(len(coords1)-1):
         for i2 in range(len(coords2)-1):
             intersection = get_intersection(coords1[i1], coords1[i1+1], coords2[i2], coords2[i2+1])
             if intersection:
-                intersections.append(intersection)
-    return intersections
+                intersections_and_indices.append([intersection, [i1,i2]])
+    return intersections_and_indices
 
 def check(wire1, wire2):
     coords1 = get_coordinates(wire1)
     coords2 = get_coordinates(wire2)
-    intersections = get_intersections(coords1, coords2)
-    distances = [sum([abs(j) for j in i]) for i in intersections]
-    return min(distances)
+    wire1_distances = get_wire_distances(wire1)
+    wire2_distances = get_wire_distances(wire2)
+    intersections_and_indices = get_intersections_and_indices(coords1, coords2)
+    total_distances = [get_coordinate_distance(coords1[inds[0]], intx) + wire1_distances[inds[0]] + wire2_distances[inds[1]] for intx,inds in intersections_and_indices]
+    return min(total_distances)
 
 def main():
     import argparse
