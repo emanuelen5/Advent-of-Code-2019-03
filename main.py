@@ -80,7 +80,7 @@ def check(wire1, wire2):
     wire1_distances = get_wire_distances(wire1)
     wire2_distances = get_wire_distances(wire2)
     intersections_and_indices = get_intersections_and_indices(coords1, coords2)
-    total_distances = [get_coordinate_distance(coords1[inds[0]], intx) + wire1_distances[inds[0]] + wire2_distances[inds[1]] for intx,inds in intersections_and_indices]
+    total_distances = [get_coordinate_distance(coords1[inds[0]], intx) + get_coordinate_distance(coords2[inds[1]], intx) + wire1_distances[inds[0]] + wire2_distances[inds[1]] for intx,inds in intersections_and_indices]
     return min(total_distances)
 
 def main():
